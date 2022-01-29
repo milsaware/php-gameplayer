@@ -1,0 +1,20 @@
+<Files .htaccess>
+Require all denied
+</Files>
+
+Options -Indexes
+Options +FollowSymLinks
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [L,R]
+
+RewriteRule ^$ ./index.php?route=home
+RewriteRule ^([a-z0-9_]*)$ ./index.php?route=$1
+RewriteRule ^game/([0-9]*)$ ./index.php?route=game&id=$1
+RewriteRule ^profile/([a-z0-9_]*)$ ./index.php?route=profile&handle=$1
+RewriteRule ^([a-z0-9_]*)/([a-z0-9_]*)$ ./index.php?route=$1&function=$2
+
+ErrorDocument 403 /error.php
+ErrorDocument 404 /error.php
+ErrorDocument 500 /error.php
